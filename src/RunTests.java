@@ -96,5 +96,28 @@ class RunTests {
         } else {
             System.out.println("One or more PlayerCards tests failed.");
         }
+
+        result = JUnitCore.runClasses(TrickLogic_Test.class);
+
+        for (Failure failure : result.getFailures() ){
+            System.out.println(failure.toString());
+        }
+        if ( result.wasSuccessful() ){
+            System.out.println("Trick Logic tests completed successfully.");
+        } else {
+            System.out.println("One or more Trick Logic tests failed.");
+        }
+
+        result = JUnitCore.runClasses(Trick_Test.class);
+
+        for (Failure failure : result.getFailures() ){
+            System.out.println(failure.toString());
+        }
+        if ( result.wasSuccessful() ){
+            System.out.println("Trick tests completed successfully.");
+        } else {
+            System.out.println("One or more Trick tests failed.");
+        }
+
     }
 }

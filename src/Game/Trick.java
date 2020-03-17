@@ -1,8 +1,8 @@
 package Game;
 
 import CardDeck.*;
-
 import static CardDeck.EuchreCardTrumpLogic.getEuchreCardSuit;
+import Participants.*;
 
 public class Trick {
     private PlayerCards playerCards;
@@ -13,21 +13,20 @@ public class Trick {
         playerCards = new PlayerCards();
         this.trump = trump;
     }
-    public void setTrump( Card.Suit trump ){
-        this.trump = trump;
+    public boolean addPlayerCard(Player player , Card card ) {
+        if ( player == null || card == null || trump == null ){ return false; }
+        return addPlayerCard( new PlayerCard( player , card ) );
     }
-    public boolean addCard( Card card ) {
-        if ( trump == null ) { return false; }
-        setLead( getEuchreCardSuit( card , trump ) );
-        return addCard( card );
+    public boolean addPlayerCard(PlayerCard playerCard ) {
+        if ( playerCard == null || trump == null ) { return false; }
+        /*Use getEuchreCardSuit instead of getSuit(), in case of Left Bower*/
+        setLead(getEuchreCardSuit( playerCard.getCard(), trump ));
+        return playerCards.add(playerCard);
     }
-    private boolean setLead( Card.Suit lead ){
-        if ( this.lead == null ){
-            this.lead = lead;
-            return true;
-        } else {
-            return false;
-        }
+    public boolean setLead( Card.Suit lead ){
+        if ( this.lead != null ){ return false; }
+        this.lead = lead;
+        return true;
     }
     public Card.Suit getTrump(){
         return trump;
@@ -35,4 +34,14 @@ public class Trick {
     public Card.Suit getLead(){
         return lead;
     }
+    public boolean isEmpty(){
+        return playerCards.getNumberOfCards() == 0;
+    }
+    /*
+    public PlayerCard getHighPlayerCard() throws IllegalStateException {
+        if ( isEmpty() ) { throw new IllegalStateException(); }
+
+        return playerCards.get(0);
+    }
+    */
 }
