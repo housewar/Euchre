@@ -1,52 +1,73 @@
 package Game;
 
 import CardDeck.Card;
+import CardDeck.Cards;
 
 import static CardDeck.EuchreCardTrumpLogic.*;
 
-/*Comparisons involving LEAD cards must involve a Trick*/
+/*Static functions involving LEAD and TRUMP necessitate a TRICK*/
 public class TrickLogic {
 
-    public static boolean cardIsLead(Card card , Trick trick )
-            throws IllegalArgumentException {
-        if ( trick == null ){ throw new IllegalArgumentException("Trick trick is NULL"); }
-        else if ( trick.getLead() == null ){ throw new IllegalArgumentException("trick.getLead() is NULL"); }
+    public static Cards getPlayableEuchreHand(Cards hand, Trick trick ) {
+
+        Card.Suit lead = trick.getLead();
+        Card.Suit trump = trick.getTrump();
+        Cards playable = new Cards();
+        for ( Card card : hand.getCards() ){
+            if ( getEuchreCardSuit( card , trump ) == lead ) {
+                playable.add(card);
+            }
+        }
+        if ( playable.isEmpty() ){
+            playable.addAll(hand);
+        }
+        return playable;
+    }
+
+
+    public static boolean cardIsLead(Card card , Trick trick ) {
 
         return  getEuchreCardSuit( card , trick.getTrump() ) == trick.getLead();
 
     }
-    public static Card getGreaterCard( Card card , Card another , Trick trick ) {
-        // Two non-Trump, non-Lead cards cannot be compared
-        if (       !cardIsLead( card , trick )
-                && !cardIsLead( another , trick )
-                && !cardIsTrump( card , trick.getTrump() )
-                && !cardIsTrump( another , trick.getTrump() ) ){
-            throw new IllegalArgumentException("Cannot compare two cards that are both non-Trump and non-Lead.");
+    public static PlayerCard getGreaterPlayerCard( PlayerCard playerCard , PlayerCard another , Trick trick ) {
+        if ( playerCard.getCard() == getGreaterCard(playerCard.getCard() , another.getCard() , trick ) ){
+            return playerCard;
+        } else {
+            return another;
         }
+    }
+
+    public static Card getGreaterCard( Card card , Card another , Trick trick ) {
 
         Card.Suit trump = trick.getTrump();
 
-        // Cards are the same suit, compare them as trump, or lead as appropriate
-        if ( cardsAreSameSuit( card , another , trump ) ){
-            if ( cardIsTrump( card , trump ) ) {
-                return getGreaterTrumpCard( card , another , trump );
-            } else {
-                return getGreaterCardRank( card , another );
-            }
-        } else if ( cardIsTrump( card , trump ) ||
-                    ( cardIsLead( card , trick) && !cardIsTrump( another , trump ) ) ) {
-            /* One card must be TRUMP or LEAD.
-             * Cards cannot be the same suit.
-             * Card(TRUMP) over Another(NON-TRUMP);
-             * OR Card(LEAD) over Another(OFF-SUIT)*/
+        if (    cardsAreSameSuit( card , another , trump )
+                && cardIsTrump( card , trump ) ) {
+
+            return getGreaterTrumpCard(card, another, trump);
+
+        } else if ( cardsAreSameSuit( card , another , trump )
+                    && cardIsLead( card , trick ) ) {
+
+            return getGreaterCardRank(card, another);
+
+        } else if ( !cardsAreSameSuit( card , another , trump )
+                    && !cardIsTrump( another , trump )
+                    && ( cardIsTrump( card , trump ) || ( cardIsLead( card , trick) ) ) ) {
+
             return card;
-        } else {
-            /* One card must be TRUMP or LEAD.
-             * Cards cannot be the same suit.
-             * NOT Card(TRUMP) over Another(NON-TRUMP);
-             * AND NOT Card(LEAD) over Another(OFF-SUIT)
-             * Another must be TRUMP or LEAD over NON-TRUMP / OFF-SUIT*/
+
+        } else if ( !cardsAreSameSuit( card , another , trump )
+                && !cardIsTrump( card , trump )
+                && ( cardIsTrump( another , trump ) || ( cardIsLead( another , trick) ) ) ) {
+
             return another;
+
+        } else {
+
+            throw new IllegalArgumentException("Cannot compare two cards that are both non-Trump and non-Lead.");
+
         }
 
     }

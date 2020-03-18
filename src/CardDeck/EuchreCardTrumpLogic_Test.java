@@ -20,14 +20,6 @@ public class EuchreCardTrumpLogic_Test {
         assertTrue( cardIsBower( right , trump ) );
         assertTrue( cardIsBower( left , trump ) );
     }
-    @Test (expected = IllegalArgumentException.class )
-    public void testCard_isBower_exception_nullTrump(){
-        cardIsBower( new Card(Card.Rank.ACE, Card.Suit.SPADES) , null );
-    }
-    @Test (expected = IllegalArgumentException.class )
-    public void testCard_isBower_exception_nullCard(){
-        cardIsBower( null , Card.Suit.SPADES );
-    }
     @Test
     public void testCard_getEuchreCardSuit(){
         Card.Suit trump = Card.Suit.SPADES;
@@ -37,14 +29,6 @@ public class EuchreCardTrumpLogic_Test {
         assertEquals( Card.Suit.HEARTS , getEuchreCardSuit( card , trump ) );
         assertEquals( Card.Suit.SPADES , getEuchreCardSuit( card1 , trump ) );
         assertEquals( Card.Suit.SPADES , getEuchreCardSuit( card2 , trump ) );
-    }
-    @Test (expected = IllegalArgumentException.class )
-    public void testCard_getEuchreCardSuit_trumpNull(){
-        getEuchreCardSuit( new Card(Card.Rank.JACK, Card.Suit.HEARTS) , null );
-    }
-    @Test (expected = IllegalArgumentException.class )
-    public void testCard_getEuchreCardSuit_cardNull(){
-        getEuchreCardSuit( null , Card.Suit.HEARTS );
     }
     @Test
     public void testCard_isTrump(){
@@ -58,15 +42,6 @@ public class EuchreCardTrumpLogic_Test {
         Card left = new Card(Card.Rank.JACK, Card.Suit.CLUBS);
         assertTrue(cardIsTrump( left , trump ) );
     }
-    @Test  (expected = IllegalArgumentException.class )
-    public void testCard_isTrump_nullTrump(){
-        cardIsTrump( new Card(Card.Rank.ACE, Card.Suit.SPADES) , null );
-    }
-    @Test  (expected = IllegalArgumentException.class )
-    public void testCard_isTrump_nullCard(){
-        cardIsTrump( null , Card.Suit.SPADES );
-    }
-
     @Test
     public void testCard_isSameSuitAs(){
         Card.Suit trump = Card.Suit.SPADES;
@@ -135,5 +110,12 @@ public class EuchreCardTrumpLogic_Test {
         assertEquals( right , getGreaterTrumpCard( right , left , trump ) );
         /*Same card*/
         assertEquals( card , getGreaterTrumpCard( card , card , trump ) );
+    }
+    @Test (expected = IllegalArgumentException.class)
+    public void testCard_greaterTrumpCard_invalidSuit(){
+        Card.Suit trump = Card.Suit.HEARTS;
+        Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
+        Card card1 = new Card(Card.Rank.KING, Card.Suit.SPADES);
+        getGreaterTrumpCard( card , card1 , trump );
     }
 }

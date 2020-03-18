@@ -53,17 +53,6 @@ class RunTests {
             System.out.println("One or more Euchre Logic tests failed.");
         }
 
-        result = JUnitCore.runClasses(PlayableHand_Test.class);
-
-        for (Failure failure : result.getFailures() ){
-            System.out.println(failure.toString());
-        }
-        if ( result.wasSuccessful() ){
-            System.out.println("Playable Hand tests completed successfully.");
-        } else {
-            System.out.println("One or more Playable Hand tests failed.");
-        }
-
         result = JUnitCore.runClasses(Player_Test.class);
 
         for (Failure failure : result.getFailures() ){

@@ -35,7 +35,6 @@ public class Trick_Test {
         assertEquals( Card.Suit.HEARTS , trick.getLead() );
         assertEquals( Card.Suit.SPADES , trick.getTrump() );
     }
-    /*
     @Test
     public void test_getHighPlayerCard_HighestLead_NoTrump(){
         Trick trick = new Trick( Card.Suit.SPADES );
@@ -49,5 +48,4 @@ public class Trick_Test {
         assertEquals( aceHearts , highPlayerCard.getCard() );
         assertEquals( player2 , highPlayerCard.getPlayer() );
     }
-    */
 }

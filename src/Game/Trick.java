@@ -1,7 +1,8 @@
 package Game;
 
 import CardDeck.*;
-import static CardDeck.EuchreCardTrumpLogic.getEuchreCardSuit;
+import static CardDeck.EuchreCardTrumpLogic.*;
+import static Game.TrickLogic.*;
 import Participants.*;
 
 public class Trick {
@@ -37,11 +38,12 @@ public class Trick {
     public boolean isEmpty(){
         return playerCards.getNumberOfCards() == 0;
     }
-    /*
     public PlayerCard getHighPlayerCard() throws IllegalStateException {
         if ( isEmpty() ) { throw new IllegalStateException(); }
-
-        return playerCards.get(0);
+        PlayerCard high = playerCards.get(0);
+        for( int i = 1  ; i < playerCards.getNumberOfCards() ; ++i ){
+            high = getGreaterPlayerCard( high , playerCards.get(i) , this );
+        }
+        return high;
     }
-    */
 }

@@ -7,11 +7,7 @@ package CardDeck;
 public class EuchreCardTrumpLogic {
 
     /*To avoid redundancy, null-check is done only once here for many functions*/
-    public static boolean cardIsBower(Card card , Card.Suit trump )
-            throws IllegalArgumentException {
-        if ( card == null ){ throw new IllegalArgumentException("Card card is NULL"); }
-        if ( trump == null ){ throw new IllegalArgumentException("Card.Suit trump is NULL"); }
-
+    public static boolean cardIsBower(Card card , Card.Suit trump ) {
         return  card.getRank() == Card.Rank.JACK
                 && trump.getColor() == card.getColor();
     }
@@ -40,10 +36,7 @@ public class EuchreCardTrumpLogic {
 
         return getEuchreCardSuit( card , trump ) == getEuchreCardSuit( another , trump );
     }
-    public static Card getGreaterCardRank( Card card , Card another )
-            throws IllegalArgumentException {
-        if ( card == null ){ throw new IllegalArgumentException("Card card is NULL"); }
-        if ( another == null ){ throw new IllegalArgumentException("Card another is NULL"); }
+    public static Card getGreaterCardRank( Card card , Card another ) {
 
         if ( card.getRankValue() >= another.getRankValue() ){
             return card;

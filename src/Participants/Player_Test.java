@@ -1,10 +1,8 @@
 package Participants;
 
 import CardDeck.Card;
-import CardDeck.Cards;
 import org.junit.Test;
 
-import static CardDeck.PlayableHand.getPlayableEuchreHand;
 import static org.junit.Assert.*;
 
 public class Player_Test {
