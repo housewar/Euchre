@@ -64,6 +64,17 @@ class RunTests {
             System.out.println("One or more Player tests failed.");
         }
 
+        result = JUnitCore.runClasses(Players_Test.class);
+
+        for (Failure failure : result.getFailures() ){
+            System.out.println(failure.toString());
+        }
+        if ( result.wasSuccessful() ){
+            System.out.println("Players tests completed successfully.");
+        } else {
+            System.out.println("One or more Players tests failed.");
+        }
+
         result = JUnitCore.runClasses(PlayerCard_Test.class);
 
         for (Failure failure : result.getFailures() ){
@@ -106,6 +117,17 @@ class RunTests {
             System.out.println("Trick tests completed successfully.");
         } else {
             System.out.println("One or more Trick tests failed.");
+        }
+
+        result = JUnitCore.runClasses(EuchreDealer_Test.class);
+
+        for (Failure failure : result.getFailures() ){
+            System.out.println(failure.toString());
+        }
+        if ( result.wasSuccessful() ){
+            System.out.println("Euchre Dealer tests completed successfully.");
+        } else {
+            System.out.println("One or more Euchre Dealer tests failed.");
         }
 
     }

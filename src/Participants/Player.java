@@ -1,14 +1,15 @@
 package Participants;
 
 import CardDeck.*;
-import Game.*;
 
 public class Player {
 
     private Cards hand;
+    private Player left;
 
     public Player(){
         hand = new Cards();
+        left = this;
     }
     public boolean handIsEmpty(){
         return hand.isEmpty();
@@ -19,4 +20,17 @@ public class Player {
     public Card getCard(int i ){
         return hand.get(i);
     }
+    public int getNumberOfCardsInHand(){
+        return hand.getNumberOfCards();
+    }
+    public Player getPlayerToLeft(){
+        return left;
+    }
+    public void setPlayerToLeft( Player player ){
+        left = player;
+    }
+    public String getHandToString(){
+        return hand.toString();
+    }
+
 }
