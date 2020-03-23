@@ -9,6 +9,8 @@ public class Player {
 
     public Player(){
         hand = new Cards();
+        /*Players Class assumes player is instantiated with a self-reference.
+        * Do not modify without also changing the Players class as appropriate*/
         left = this;
     }
     public boolean handIsEmpty(){
@@ -28,6 +30,9 @@ public class Player {
     }
     public void setPlayerToLeft( Player player ){
         left = player;
+    }
+    public void sortHand(){
+        hand.sort();
     }
     public String getHandToString(){
         return hand.toString();

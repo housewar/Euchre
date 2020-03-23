@@ -36,35 +36,4 @@ public class EuchreCardTrumpLogic {
 
         return getEuchreCardSuit( card , trump ) == getEuchreCardSuit( another , trump );
     }
-    public static Card getGreaterCardRank( Card card , Card another ) {
-
-        if ( card.getRankValue() >= another.getRankValue() ){
-            return card;
-        } else {
-            return another;
-        }
-    }
-    /*The bowers make comparing two trump cards slightly more difficult.
-    * This method compares two cards that are known to be trump.
-    * This program should never submit a non-Trump card to this method, so an IllegalArgumentException
-    * has been added to assist in debugging.
-    * Reminder of the ranking rules in Euchre:
-    * 1. The Right Bower is the Jack of the trump suit, nothing beats that
-    * 2. The Left Bower is the Jack of the non-trump same-color suit, second to the Right Bower
-    * 3. All other trump values compare as they normally would.*/
-    public static Card getGreaterTrumpCard(Card card , Card another , Card.Suit trump ) throws IllegalArgumentException {
-        if ( !cardIsTrump( card , trump ) || !cardIsTrump( another , trump ) ){
-            throw new IllegalArgumentException("Cannot compare non-Trump cards using getGreaterTrumpCard.");
-        }
-
-        if (       ( cardIsRightBower( card , trump ) && !cardIsRightBower( another , trump) )
-                || ( cardIsLeftBower( card , trump) && !cardIsBower( another , trump) )
-                || ( !cardIsBower( card , trump) && !cardIsBower( another , trump) ) && card.compareTo(another) == 1 ) {
-            return card;
-        } else if ( card.getRank() == another.getRank() && card.getSuit() == another.getSuit() ){
-            return card;
-        } else {
-            return another;
-        }
-    }
 }

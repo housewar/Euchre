@@ -10,6 +10,42 @@ import static org.junit.Assert.*;
 public class TrickLogic_Test {
 
     @Test
+    public void testCard_greaterCardRank(){
+        Card.Suit lead = Card.Suit.HEARTS;
+        Card card = new Card(Card.Rank.ACE, Card.Suit.HEARTS);
+        Card card1 = new Card(Card.Rank.KING, Card.Suit.HEARTS);
+        assertEquals( card , TrickLogic.getGreaterCardRank( card , card1 ) );
+    }
+    @Test
+    public void testCard_greaterTrumpCard(){
+        Card.Suit trump = Card.Suit.SPADES;
+        Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
+        Card card1 = new Card(Card.Rank.KING, Card.Suit.SPADES);
+        Card right = new Card(Card.Rank.JACK, Card.Suit.SPADES);
+        Card left = new Card(Card.Rank.JACK, Card.Suit.CLUBS);
+        /*Basic rank over rank*/
+        assertEquals( card , TrickLogic.getGreaterTrumpCard( card , card1 , trump ) );
+        assertEquals( card , TrickLogic.getGreaterTrumpCard( card1 , card , trump ) );
+        /*Right Bower over Ace*/
+        assertEquals( right , TrickLogic.getGreaterTrumpCard( card , right , trump ) );
+        assertEquals( right , TrickLogic.getGreaterTrumpCard( right , card , trump ) );
+        /*Left Bower over Ace*/
+        assertEquals( left , TrickLogic.getGreaterTrumpCard( left , card , trump ) );
+        assertEquals( left , TrickLogic.getGreaterTrumpCard( card , left , trump ) );
+        /*Right over Left*/
+        assertEquals( right , TrickLogic.getGreaterTrumpCard( left , right , trump ) );
+        assertEquals( right , TrickLogic.getGreaterTrumpCard( right , left , trump ) );
+        /*Same card*/
+        assertEquals( card , TrickLogic.getGreaterTrumpCard( card , card , trump ) );
+    }
+    @Test (expected = IllegalArgumentException.class)
+    public void testCard_greaterTrumpCard_invalidSuit(){
+        Card.Suit trump = Card.Suit.HEARTS;
+        Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
+        Card card1 = new Card(Card.Rank.KING, Card.Suit.SPADES);
+        TrickLogic.getGreaterTrumpCard( card , card1 , trump );
+    }
+    @Test
     public void testCard_cardIsLead(){
         Trick trick = new Trick( Card.Suit.SPADES );
         trick.setLead( Card.Suit.CLUBS );
