@@ -54,4 +54,7 @@ public class Deck {
     public void sort(){
         Collections.sort(deck);
     }
+    public ArrayList<Card> toArrayList(){
+        return deck;
+    }
 }

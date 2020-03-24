@@ -73,6 +73,22 @@ public class TrickLogic_Test {
         assertEquals( expected.toString() , getPlayableEuchreHand( hand , trick ).toString() );
     }
     @Test
+    public void test_getLeadAndTrump_PlayableBothBowers(){
+        Trick trick = new Trick ( Card.Suit.SPADES );
+        trick.setLead( Card.Suit.SPADES );
+        Cards hand = new Cards();
+        hand.add( new Card(Card.Rank.ACE , Card.Suit.SPADES ));
+        hand.add( new Card(Card.Rank.KING , Card.Suit.DIAMONDS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.TEN , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.SPADES ));
+        Cards expected = new Cards();
+        expected.add(hand.get(0));
+        expected.add(hand.get(2));
+        expected.add(hand.get(4));
+        assertEquals( expected.toString() , getPlayableEuchreHand( hand , trick ).toString() );
+    }
+    @Test
     public void test_getPlayableHand_NeitherBower(){
         Trick trick = new Trick ( Card.Suit.SPADES );
         trick.setLead( Card.Suit.CLUBS );
@@ -87,6 +103,23 @@ public class TrickLogic_Test {
         assertEquals( expected.toString() , getPlayableEuchreHand( hand , trick ).toString() );
     }
     @Test
+    public void test_getLeadAndTrump_PlayableNeitherBower(){
+        Trick trick = new Trick ( Card.Suit.SPADES );
+        trick.setLead( Card.Suit.CLUBS );
+        Cards hand = new Cards();
+        hand.add( new Card(Card.Rank.ACE , Card.Suit.SPADES ));
+        hand.add( new Card(Card.Rank.KING , Card.Suit.DIAMONDS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.TEN , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.SPADES ));
+        Cards expected = new Cards();
+        expected.add(hand.get(0));
+        expected.add(hand.get(2));
+        expected.add(hand.get(3));
+        expected.add(hand.get(4));
+        assertEquals( expected.toString() , getLeadAndTrumpHand( hand , trick ).toString() );
+    }
+    @Test
     public void test_getPlayableHand_void(){
         Trick trick = new Trick ( Card.Suit.SPADES );
         trick.setLead( Card.Suit.HEARTS );
@@ -99,6 +132,22 @@ public class TrickLogic_Test {
         Cards expected = new Cards();
         expected.addAll(hand);
         assertEquals( expected.toString() , getPlayableEuchreHand( hand , trick ).toString() );
+    }
+    @Test
+    public void test_getLeadAndTrump_PlayableVoid(){
+        Trick trick = new Trick ( Card.Suit.SPADES );
+        trick.setLead( Card.Suit.HEARTS );
+        Cards hand = new Cards();
+        hand.add( new Card(Card.Rank.ACE , Card.Suit.SPADES ));
+        hand.add( new Card(Card.Rank.KING , Card.Suit.DIAMONDS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.TEN , Card.Suit.CLUBS ));
+        hand.add( new Card(Card.Rank.JACK , Card.Suit.SPADES ));
+        Cards expected = new Cards();
+        expected.add(hand.get(0));
+        expected.add(hand.get(2));
+        expected.add(hand.get(4));
+        assertEquals( expected.toString() , getLeadAndTrumpHand( hand , trick ).toString() );
     }
     @Test
     public void testCard_greaterCard_LeadOverLead(){

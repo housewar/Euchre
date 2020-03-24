@@ -24,6 +24,18 @@ public class TrickLogic {
         return playable;
     }
 
+    public static Cards getLeadAndTrumpHand(Cards hand, Trick trick ) {
+        Card.Suit lead = trick.getLead();
+        Card.Suit trump = trick.getTrump();
+        Cards playable = new Cards();
+        for ( Card card : hand.getCards() ){
+            if ( getEuchreCardSuit( card , trump ) == lead || cardIsTrump( card , trump ) ) {
+                playable.add(card);
+            }
+        }
+        return playable;
+    }
+
 
     public static boolean cardIsLead(Card card , Trick trick ) {
 

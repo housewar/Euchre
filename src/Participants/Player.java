@@ -37,5 +37,4 @@ public class Player {
     public String getHandToString(){
         return hand.toString();
     }
-
 }

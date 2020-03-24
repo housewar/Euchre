@@ -10,7 +10,7 @@ public class PlayerCards {
     private ArrayList<PlayerCard> playerCards;
 
     public PlayerCards(){
-        playerCards = new ArrayList<PlayerCard>();
+        playerCards = new ArrayList<>();
     }
     public ArrayList<PlayerCard> getPlayerCards(){
         return playerCards;
@@ -47,5 +47,8 @@ public class PlayerCards {
     }
     public void print(){
         System.out.println(playerCards.toString());
+    }
+    public ArrayList<PlayerCard> copy(){
+        return new ArrayList<>(playerCards);
     }
 }

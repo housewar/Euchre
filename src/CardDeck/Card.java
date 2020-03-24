@@ -90,6 +90,9 @@ public class Card implements Comparable<Card> {
     public Suit getSuit() {
         return suit;
     }
+    public int getSuitValue() {
+        return suit.getSuitValue();
+    }
     public Suit.Color getColor() {
         return suit.getColor();
     }

@@ -36,4 +36,37 @@ public class EuchreCardTrumpLogic {
 
         return getEuchreCardSuit( card , trump ) == getEuchreCardSuit( another , trump );
     }
+    public static void sortCardsWithTrump( Cards cards , Card.Suit trump ){
+        cards.sort();
+        Card left = removeLeftBower( cards , trump );
+        Card right = removeRightBower( cards , trump );
+        int index = findBowerInsertionIndex( cards , trump );
+        if ( right != null ){
+            cards.add( index , right );
+        }
+        if ( left != null ){
+            cards.add( index , left );
+        }
+    }
+    public static int findBowerInsertionIndex( Cards cards , Card.Suit trump ){
+        int bower_spot = 0;
+        while ( bower_spot < cards.getNumberOfCards() && cards.get(bower_spot).getSuitValue() <= trump.getSuitValue() ){
+            ++bower_spot;
+        }
+        return bower_spot;
+    }
+    public static Card removeLeftBower( Cards cards , Card.Suit trump ){
+        int left = 0;
+        while ( left < cards.getNumberOfCards() && !cardIsLeftBower( cards.get(left), trump ) ){
+            ++left;
+        }
+        return left < cards.getNumberOfCards() ? cards.remove(left) : null;
+    }
+    public static Card removeRightBower( Cards cards , Card.Suit trump ){
+        int right = 0;
+        while ( right < cards.getNumberOfCards() && !cardIsRightBower( cards.get(right), trump ) ){
+            ++right;
+        }
+        return right < cards.getNumberOfCards() ? cards.remove(right) : null;
+    }
 }

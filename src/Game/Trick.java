@@ -5,6 +5,8 @@ import static CardDeck.EuchreCardTrumpLogic.*;
 import static Game.TrickLogic.*;
 import Participants.*;
 
+import java.util.ArrayList;
+
 public class Trick {
     private PlayerCards playerCards;
     private Card.Suit trump;
@@ -45,5 +47,8 @@ public class Trick {
             high = getGreaterPlayerCard( high , playerCards.get(i) , this );
         }
         return high;
+    }
+    public ArrayList<PlayerCard> getCopyOfPlayerCards(){
+        return playerCards.copy();
     }
 }

@@ -7,7 +7,10 @@ public class Cards {
     private ArrayList<Card> cards;
 
     public Cards(){
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
+    }
+    public Cards( Deck deck ){
+        cards.addAll(deck.toArrayList());
     }
     public ArrayList<Card> getCards(){
         return cards;
@@ -21,11 +24,17 @@ public class Cards {
     public boolean add(Card c){
         return cards.add(c);
     }
+    public void add(int i , Card c){
+        cards.add( i, c );
+    }
     public Card get(int i){
         return cards.get(i);
     }
     public Card remove(int i){
         return cards.remove(i);
+    }
+    public boolean remove(Card card){
+        return cards.remove(card);
     }
     public boolean addAll( Cards cards){
         return this.cards.addAll( cards.cards );
