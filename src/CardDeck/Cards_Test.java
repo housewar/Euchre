@@ -2,8 +2,6 @@ package CardDeck;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class Cards_Test {
@@ -52,7 +50,20 @@ public class Cards_Test {
         assertEquals( cards[2] , hand.get(3) );
     }
     @Test
-    public void testHand_remove(){
+    public void testCards_Deck(){
+        Deck d = new Deck ( Card.Rank.KING , Card.Rank.ACE );
+        assertEquals( 8 , d.getNumberOfCards() );
+        Cards c = new Cards( d );
+        assertEquals( 8 , c.getNumberOfCards() );
+    }
+    @Test
+    public void testCards_Deck_string(){
+        Deck d = new Deck ( Card.Rank.KING , Card.Rank.ACE );
+        Cards c = new Cards( d );
+        assertEquals( "K\u2660 | A\u2660 | K\u2666 | A\u2666 | K\u2663 | A\u2663 | K\u2665 | A\u2665 " , c.toString() );
+    }
+    @Test
+    public void testHand_remove_i(){
         Cards hand = new Cards();
         Card[] cards = new Card[4];
         cards[0] = new Card( Card.Rank.JACK , Card.Suit.SPADES );
@@ -64,6 +75,41 @@ public class Cards_Test {
         hand.add( cards[2] );
         hand.add( cards[3] );
         hand.remove( 2 );
+        assertEquals( cards[0] , hand.get(0) );
+        assertEquals( cards[1] , hand.get(1) );
+        assertEquals( cards[3] , hand.get(2) );
+    }
+    @Test
+    public void testHand_remove_o(){
+        Cards hand = new Cards();
+        Card[] cards = new Card[4];
+        cards[0] = new Card( Card.Rank.JACK , Card.Suit.SPADES );
+        cards[1] = new Card( Card.Rank.QUEEN , Card.Suit.DIAMONDS );
+        cards[2] = new Card( Card.Rank.KING , Card.Suit.CLUBS );
+        cards[3] = new Card( Card.Rank.ACE , Card.Suit.HEARTS );
+        hand.add( cards[0] );
+        hand.add( cards[1] );
+        hand.add( cards[2] );
+        hand.add( cards[3] );
+        hand.remove( cards[2] );
+        assertEquals( cards[0] , hand.get(0) );
+        assertEquals( cards[1] , hand.get(1) );
+        assertEquals( cards[3] , hand.get(2) );
+    }
+    @Test
+    public void testHand_remove_o_equals(){
+        Cards hand = new Cards();
+        Card[] cards = new Card[4];
+        cards[0] = new Card( Card.Rank.JACK , Card.Suit.SPADES );
+        cards[1] = new Card( Card.Rank.QUEEN , Card.Suit.DIAMONDS );
+        cards[2] = new Card( Card.Rank.KING , Card.Suit.CLUBS );
+        cards[3] = new Card( Card.Rank.ACE , Card.Suit.HEARTS );
+        hand.add( cards[0] );
+        hand.add( cards[1] );
+        hand.add( cards[2] );
+        hand.add( cards[3] );
+        Card kingClubs = new Card( Card.Rank.KING , Card.Suit.CLUBS );
+        hand.remove( kingClubs );
         assertEquals( cards[0] , hand.get(0) );
         assertEquals( cards[1] , hand.get(1) );
         assertEquals( cards[3] , hand.get(2) );

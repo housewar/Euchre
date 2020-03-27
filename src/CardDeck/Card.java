@@ -96,11 +96,18 @@ public class Card implements Comparable<Card> {
     public Suit.Color getColor() {
         return suit.getColor();
     }
+    @Override
     public String toString() {
         return rank.getRankChar() + suit.getSuitChar();
     }
-    public boolean equals(Card another) {
-        return another != null && this.rank == another.rank && this.suit == another.suit;
+    @Override
+    public boolean equals(Object o) {
+        if ( o instanceof Card ){
+            Card another = (Card)o;
+            return this.rank == another.rank && this.suit == another.suit;
+        } else {
+            return false;
+        }
     }
     /* To sort a deck or a hand by suit and then rank, a value is assigned to each card.
      * The rank value is added to the suit value multiplied by the cards per suit (13).
@@ -113,6 +120,7 @@ public class Card implements Comparable<Card> {
     protected int calculateSortValue() {
         return (this.suit.getSuitValue() * CARDS_PER_SUIT) + this.rank.getRankValue();
     }
+    @Override
     public int compareTo(Card another) {
         return Integer.compare(this.calculateSortValue(), another.calculateSortValue());
     }

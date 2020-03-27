@@ -34,7 +34,7 @@ public class Deck {
             }
         }
     }
-    public int getNumberOfCardsLeft(){
+    public int getNumberOfCards(){
         return deck.size();
     }
     /*Removing from the back to avoid shifting elements*/

@@ -7,15 +7,8 @@ import static org.junit.Assert.*;
 public class Card_Test {
 
     @Test
-    public void testCard_Constructor(){
-        Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
-        assertTrue( card instanceof Card );
-    }
-
-    @Test
     public void testCard_getters(){
         Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
-        assertTrue( card instanceof Card );
         assertEquals(Card.Suit.SPADES , card.getSuit() );
         assertEquals( Card.Suit.Color.BLACK , card.getColor() );
         assertEquals(Card.Rank.ACE , card.getRank() );
@@ -35,7 +28,6 @@ public class Card_Test {
     @Test
     public void testCard_toString(){
         Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
-        assertTrue( card instanceof Card );
         assertEquals( "A\u2660" , card.toString() );
         Card another = new Card(Card.Rank.NINE, Card.Suit.HEARTS);
         assertEquals( "9\u2665" , another.toString() );
@@ -55,9 +47,9 @@ public class Card_Test {
         Card card = new Card(Card.Rank.ACE, Card.Suit.SPADES);
         Card another = new Card(Card.Rank.NINE, Card.Suit.HEARTS);
         Card anotherAce = new Card(Card.Rank.ACE, Card.Suit.SPADES);
-        assertFalse(card.equals(another));
-        assertTrue(card.equals(card));
-        assertFalse(card.equals(null));
-        assertTrue(card.equals(anotherAce));
+        assertNotEquals(card , another );
+        assertEquals( card , card );
+        assertNotEquals( card ,  null );
+        assertEquals( card , anotherAce );
     }
 }

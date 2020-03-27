@@ -10,6 +10,7 @@ public class Cards {
         cards = new ArrayList<>();
     }
     public Cards( Deck deck ){
+        cards = new ArrayList<>();
         cards.addAll(deck.toArrayList());
     }
     public ArrayList<Card> getCards(){

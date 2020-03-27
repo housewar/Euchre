@@ -130,5 +130,16 @@ class RunTests {
             System.out.println("One or more Euchre Dealer tests failed.");
         }
 
+        result = JUnitCore.runClasses(PlayerCardCounter_Test.class);
+
+        for (Failure failure : result.getFailures() ){
+            System.out.println(failure.toString());
+        }
+        if ( result.wasSuccessful() ){
+            System.out.println("Player Card Counter tests completed successfully.");
+        } else {
+            System.out.println("One or more Player Card Counter tests failed.");
+        }
+
     }
 }

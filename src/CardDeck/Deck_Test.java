@@ -9,36 +9,36 @@ public class Deck_Test {
     @Test
     public void testDeck_get(){
         Deck deck = DeckFactory.getEuchreDeck();
-        assertEquals( 24 , deck.getNumberOfCardsLeft() );
-        assertEquals( true , (deck.get(0)).equals( new Card( Card.Rank.NINE , Card.Suit.SPADES ) ) );
-        assertEquals( true , (deck.get(1)).equals( new Card( Card.Rank.TEN , Card.Suit.SPADES ) ) );
-        assertEquals( true , (deck.get(22)).equals( new Card( Card.Rank.KING , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.get(23)).equals( new Card( Card.Rank.ACE , Card.Suit.HEARTS ) ) );
+        assertEquals( 24 , deck.getNumberOfCards() );
+        assertEquals((deck.get(0)), new Card(Card.Rank.NINE, Card.Suit.SPADES));
+        assertEquals((deck.get(1)), new Card(Card.Rank.TEN, Card.Suit.SPADES));
+        assertEquals((deck.get(22)), new Card(Card.Rank.KING, Card.Suit.HEARTS));
+        assertEquals((deck.get(23)), new Card(Card.Rank.ACE, Card.Suit.HEARTS));
     }
 
     @Test
     public void testDeck_DealNext(){
         Deck deck = DeckFactory.getEuchreDeck();
-        assertEquals( 24 , deck.getNumberOfCardsLeft() );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.ACE , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.KING , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.QUEEN , Card.Suit.HEARTS ) ) );
-        assertEquals( 21 , deck.getNumberOfCardsLeft() );
+        assertEquals( 24 , deck.getNumberOfCards() );
+        assertEquals((deck.removeNext()), new Card(Card.Rank.ACE, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.KING, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.QUEEN, Card.Suit.HEARTS));
+        assertEquals( 21 , deck.getNumberOfCards() );
     }
 
     @Test
     public void testDeck_reset(){
         Deck deck = DeckFactory.getEuchreDeck();
-        assertEquals( 24 , deck.getNumberOfCardsLeft() );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.ACE , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.KING , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.QUEEN , Card.Suit.HEARTS ) ) );
-        assertEquals( 21 , deck.getNumberOfCardsLeft() );
+        assertEquals( 24 , deck.getNumberOfCards() );
+        assertEquals((deck.removeNext()), new Card(Card.Rank.ACE, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.KING, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.QUEEN, Card.Suit.HEARTS));
+        assertEquals( 21 , deck.getNumberOfCards() );
         deck.reset();
-        assertEquals( 24 , deck.getNumberOfCardsLeft() );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.ACE , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.KING , Card.Suit.HEARTS ) ) );
-        assertEquals( true , (deck.removeNext()).equals( new Card( Card.Rank.QUEEN , Card.Suit.HEARTS ) ) );
+        assertEquals( 24 , deck.getNumberOfCards() );
+        assertEquals((deck.removeNext()), new Card(Card.Rank.ACE, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.KING, Card.Suit.HEARTS));
+        assertEquals((deck.removeNext()), new Card(Card.Rank.QUEEN, Card.Suit.HEARTS));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class Deck_Test {
         another.shuffle();
         int difference = 0;
         int absDifference = 0;
-        for ( int i = 0 ; i < deck.getNumberOfCardsLeft() ; ++i ){
+        for (int i = 0; i < deck.getNumberOfCards() ; ++i ){
             difference += deck.get(i).calculateSortValue() - another.get(i).calculateSortValue();
             absDifference += Math.abs(deck.get(i).calculateSortValue() - another.get(i).calculateSortValue());
         }
@@ -57,7 +57,7 @@ public class Deck_Test {
         another.sort();
         difference = 0;
         absDifference = 0;
-        for ( int i = 0 ; i < deck.getNumberOfCardsLeft() ; ++i ){
+        for (int i = 0; i < deck.getNumberOfCards() ; ++i ){
             difference += deck.get(i).calculateSortValue() - another.get(i).calculateSortValue();
             absDifference += Math.abs(deck.get(i).calculateSortValue() - another.get(i).calculateSortValue());
         }

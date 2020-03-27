@@ -3,18 +3,17 @@ package Game;
 import CardDeck.Card;
 import CardDeck.Cards;
 import CardDeck.Deck;
-import CardDeck.DeckFactory;
 import Participants.Player;
-import Participants.Players;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class PlayerCardCounter {
 
-    private Map<Player, Cards> playerCardCounter;
+    private HashMap<Player, Cards> playerCardCounter;
 
     public PlayerCardCounter() {
+        playerCardCounter = new HashMap<>();
     }
 
     public void add( Player player , Deck deck ) {
@@ -30,5 +29,8 @@ public class PlayerCardCounter {
         for ( Player player : playerCardCounter.keySet() ){
             playerCardCounter.get( player ).remove( card );
         }
+    }
+    public Cards getCards(Player player ){
+        return playerCardCounter.get( player );
     }
 }
